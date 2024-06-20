@@ -19,7 +19,6 @@ namespace MyLibrary {
 			/// </summary>
 			/// <typeparam name="T"></typeparam>
 			/// <param name="prompt"></param>
-			/// <returns></returns>
 			public static T? ReadLineLoop<T>(string prompt) {
 				return ReadLineLoop<T>(prompt, "Please enter your input in the correct format.");
 			}
@@ -32,7 +31,6 @@ namespace MyLibrary {
 			/// <typeparam name="T"></typeparam>
 			/// <param name="prompt"></param>
 			/// <param name="errorMessage"></param>
-			/// <returns></returns>
 			public static T? ReadLineLoop<T>(string prompt, string errorMessage) {
 				// Writes Prompt
 				System.Console.Write(prompt);
@@ -98,7 +96,6 @@ namespace MyLibrary {
 			///		<para><see cref="Ordinal"/> must have exactly 1 <see langword="param"/>.</para>
 			/// </summary>
 			/// <param name="number"></param>
-			/// <returns></returns>
 			public static string? Ordinal(int number) {
 				// Checks If Int Is Not An Ordinal
 				if (number <= 0) {
@@ -226,7 +223,6 @@ namespace MyLibrary {
 			///		<para>Chooses a random <see cref="char"/> from <see cref="ALLKEYBOARDCHARS"/>.</para>
 			///		<para><see cref="NextChar(string, System.Random)"/> can have 0 to 2 <see langword="params"/> but the <see cref="string"/> <see langword="param"/> can be switched for a <see cref="char"/>[] to make <see cref="NextChar(char[], System.Random)"/>.</para>
 			/// </summary>
-			/// <returns></returns>
 			public static char NextChar() {
 				return NextChar(ALLKEYBOARDCHARS, new System.Random());
 			}
@@ -236,7 +232,6 @@ namespace MyLibrary {
 			///		<para><see cref="NextChar(string, System.Random)"/> can have 0 to 2 <see langword="params"/> but the <see cref="string"/> <see langword="param"/> can be switched for a <see cref="char"/>[] to make <see cref="NextChar(char[], System.Random)"/>.</para>
 			/// </summary>
 			/// <param name="charPool"></param>
-			/// <returns></returns>
 			public static char NextChar(string charPool) {
 				return NextChar(charPool, new System.Random());
 			}
@@ -246,7 +241,6 @@ namespace MyLibrary {
 			///		<para><see cref="NextChar(char[], System.Random)"/> can have 0 to 2 <see langword="params"/> but the <see cref="char"/>[] <see langword="param"/> can be switched for a <see cref="string"/> to make <see cref="NextChar(string, System.Random)"/>.</para>
 			/// </summary>
 			/// <param name="charPool"></param>
-			/// <returns></returns>
 			public static char NextChar(char[] charPool) {
 				return NextChar(string.Concat(charPool), new System.Random());
 			}
@@ -256,7 +250,6 @@ namespace MyLibrary {
 			///		<para><see cref="NextChar(string, System.Random)"/> can have 0 to 2 <see langword="params"/> but the <see cref="string"/> <see langword="param"/> can be switched for a <see cref="char"/>[] to make <see cref="NextChar(char[], System.Random)"/>.</para>
 			/// </summary>
 			/// <param name="rand"></param>
-			/// <returns></returns>
 			public static char NextChar(System.Random rand) {
 				return NextChar(ALLKEYBOARDCHARS, rand);
 			}
@@ -267,7 +260,6 @@ namespace MyLibrary {
 			/// </summary>
 			/// <param name="charPool"></param>
 			/// <param name="rand"></param>
-			/// <returns></returns>
 			public static char NextChar(char[] charPool, System.Random rand) {
 				return NextChar(string.Concat(charPool), rand);
 			}
@@ -278,7 +270,6 @@ namespace MyLibrary {
 			/// </summary>
 			/// <param name="charPool"></param>
 			/// <param name="rand"></param>
-			/// <returns></returns>
 			public static char NextChar(string charPool, System.Random rand) {
 				return charPool[rand.Next(charPool.Length)];
 			}
@@ -289,7 +280,6 @@ namespace MyLibrary {
 			///		<para><see cref="Chance(int, System.Random)"/> can have 1 to 2 <see langword="params"/> but the <see cref="int"/> <see langword="param"/> can be switched for a <see cref="double"/> to make <see cref="Chance(double, System.Random)"/>.</para>
 			/// </summary>
 			/// <param name="percent"></param>
-			/// <returns></returns>
 			public static bool Chance(int percent) {
 				return Chance(percent, new System.Random());
 			}
@@ -301,7 +291,6 @@ namespace MyLibrary {
 			/// </summary>
 			/// <param name="percent"></param>
 			/// <param name="rand"></param>
-			/// <returns></returns>
 			public static bool Chance(int percent, System.Random rand) {
 				if (percent > rand.Next(100)) {
 					return true;
@@ -315,7 +304,6 @@ namespace MyLibrary {
 			///		<para><see cref="Chance(double, System.Random)"/> can have 1 to 2 <see langword="params"/> but the <see cref="double"/> <see langword="param"/> can be switched for a <see cref="int"/> to make <see cref="Chance(int, System.Random)"/>.</para>
 			/// </summary>
 			/// <param name="percent"></param>
-			/// <returns></returns>
 			public static bool Chance(double percent) {
 				return Chance(percent, new System.Random());
 			}
@@ -327,7 +315,6 @@ namespace MyLibrary {
 			/// </summary>
 			/// <param name="percent"></param>
 			/// <param name="rand"></param>
-			/// <returns></returns>
 			public static bool Chance(double percent, System.Random rand) {
 				if (percent > rand.NextDouble()) {
 					return true;
