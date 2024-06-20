@@ -131,6 +131,7 @@ namespace MyLibrary {
 
 			/// <summary>
 			///		<para>Moves <see cref="System.Console"/> cursor 1 position backwards and removes <see cref="char"/> on that position.</para>
+			///		<para><see cref="Erase(int, bool)"/> uses a feature similar to <see langword="text-wrap"/> if process would go past the <see cref="System.Console"/> border.</para>
 			///		<para><see cref="Erase(int, bool)"/> can have 0 to 2 <see langword="params"/>.</para>
 			/// </summary>
 			public static void Erase() {
@@ -141,6 +142,7 @@ namespace MyLibrary {
 			///		<para>If value of <see cref="bool"/> <paramref name="forwards"/> is <see langword="false"/>, moves <see cref="System.Console"/> cursor 1 position backwards and removes <see cref="char"/> on that position of <see cref="System.Console"/>.</para>
 			///		<para>Otherwise, removes <see cref="char"/> on current cursor position of <see cref="System.Console"/>.</para>
 			///		<para>If value of <paramref name="forwards"/> is <see langword="false"/>, then <see cref="System.Console"/></para>
+			///		<para><see cref="Erase(int, bool)"/> uses a feature similar to <see langword="text-wrap"/> if process would go past the <see cref="System.Console"/> border.</para>
 			///		<para><see cref="Erase(int, bool)"/> can have 0 to 2 <see langword="params"/>.</para>
 			/// </summary>
 			/// <param name="forwards"></param>
@@ -150,6 +152,7 @@ namespace MyLibrary {
 
 			/// <summary>
 			///		<para>Moves <see cref="System.Console"/> cursor <see cref="int"/> <paramref name="numberOfCharacters"/> backwards and removes all <see cref="char"/>s within <paramref name="numberOfCharacters"/> positions ahead.</para>
+			///		<para><see cref="Erase(int, bool)"/> uses a feature similar to <see langword="text-wrap"/> if process would go past the <see cref="System.Console"/> border.</para>
 			///		<para><see cref="Erase(int, bool)"/> can have 0 to 2 <see langword="params"/>.</para>
 			/// </summary>
 			/// <param name="numberOfCharacters"></param>
@@ -160,6 +163,7 @@ namespace MyLibrary {
 			/// <summary>
 			///		<para>If value of <see cref="bool"/> <paramref name="forwards"/> is <see langword="true"/>, removes all <see cref="char"/>s within <see cref="int"/> <paramref name="numberOfCharacters"/> positions ahead.</para>
 			///		<para>Otherwise, moves <see cref="System.Console"/> cursor <paramref name="numberOfCharacters"/> positions backwards and removes all <see cref="char"/>s within <paramref name="numberOfCharacters"/> positions ahead.</para>
+			///		<para><see cref="Erase(int, bool)"/> uses a feature similar to <see langword="text-wrap"/> if process would go past the <see cref="System.Console"/> border.</para>
 			///		<para><see cref="Erase(int, bool)"/> can have 0 to 2 <see langword="params"/>.</para>
 			/// </summary>
 			/// <param name="numberOfCharacters"></param>
@@ -205,6 +209,33 @@ namespace MyLibrary {
 				for (int i = 0; i < totalChars; i++) {
 					System.Console.Write(fillString[i % fillString.Length]);
 				}
+			}
+
+			/// <summary>
+			///		<para>Shifts <see cref="System.Console"/> cursor's horizontal position in the direct and value of <see cref="int"/> <paramref name="horizontalShift"/>.</para>
+			///		<para>The value of <paramref name="horizontalShift"/> will be clipped to fit within <see cref="System.Console"/> bounds.</para>
+			///		<para><see cref="ShiftCursorPosition(int, int)"/> can have 1 to 2 <see langword="params"/>.</para>
+			/// </summary>
+			/// <param name="horizontalShift"></param>
+			public static void ShiftCursorPosition(int horizontalShift) {
+				ShiftCursorPosition(horizontalShift, 0);
+			}
+
+			/// <summary>
+			///		<para>Shifts <see cref="System.Console"/> cursor's position in the direction and value of <see cref="int"/> <paramref name="horizontalShift"/> and <see cref="int"/> <paramref name="verticalShift"/>.</para>
+			///		<para>The values of <paramref name="horizontalShift"/> and <paramref name="verticalShift"/> will be clipped to fit within <see cref="System.Console"/> bounds.</para>
+			///		<para><see cref="ShiftCursorPosition(int, int)"/> can have 1 to 2 <see langword="params"/>.</para>
+			/// </summary>
+			/// <param name="horizontalShift"></param>
+			/// <param name="verticalShift"></param>
+			public static void ShiftCursorPosition(int horizontalShift, int verticalShift) {
+				int hShift = Math.Max(System.Console.CursorLeft + horizontalShift, 0);
+				hShift = Math.Min(hShift, System.Console.WindowWidth - 1);
+
+				int vShift = Math.Max(System.Console.CursorTop + verticalShift, 0);
+				vShift = Math.Min(vShift, System.Console.WindowHeight - 1);
+
+				System.Console.SetCursorPosition(hShift, vShift);
 			}
 		}
 
