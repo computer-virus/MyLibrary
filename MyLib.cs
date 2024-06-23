@@ -170,7 +170,9 @@ namespace MyLibrary {
 			/// <param name="forwards"></param>
 			public static void Erase(int numberOfCharacters, bool forwards) {
 				if (forwards) {
-					System.Console.Write(new string(' ', numberOfCharacters) + new string('\b', numberOfCharacters));
+					int[] cursorPosition = [System.Console.CursorLeft, System.Console.CursorTop];
+					System.Console.Write(new string(' ', numberOfCharacters));
+					System.Console.SetCursorPosition(cursorPosition[0], cursorPosition[1]);
 				} else {
 					for (int i = 0; i < numberOfCharacters; i++) {
 						int[] cursorPosition = [System.Console.CursorLeft, System.Console.CursorTop];
