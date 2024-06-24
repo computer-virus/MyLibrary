@@ -15,23 +15,37 @@ namespace MyLibrary {
 			/// <summary>
 			///		<para>Writes <paramref name="prompt"/> to <see cref="System.Console"/> and then attempts to convert <see cref="System.Console.ReadLine"/> to the requested data type <typeparamref name="T"/>.</para>
 			///		<para>If the conversion fails, writes a generic error to <see cref="System.Console"/>, removes <see cref="System.Console.ReadLine"/>'s input from <see cref="System.Console"/>, and loops.</para>
-			///		<para><see cref="ReadLineLoop{Task}(string, string)"/> can have 1 to 2 <see langword="params"/>.</para>
+			///		<para><see cref="ReadLineLoop{Task}(string, string, bool)"/> can have 1 to 3 <see langword="params"/>.</para>
 			/// </summary>
 			/// <typeparam name="T"></typeparam>
 			/// <param name="prompt"></param>
 			public static T? ReadLineLoop<T>(string prompt) {
-				return ReadLineLoop<T>(prompt, "Please enter your input in the correct format.");
+				return ReadLineLoop<T>(prompt, "Please enter your input in the correct format.", false);
 			}
 
 			/// <summary>
-			///		<para>Writes <paramref name="prompt"/> to <see cref="System.Console"/> and then attempts to convert <see cref="System.Console.ReadLine"/> to the requested data type <typeparamref name="T"/>.</para>
+			///		<para>Writes <paramref name="prompt"/> to <see cref="System.Console"/> and then attempts to convert <see cref="System.Console.ReadLine"/> output to the requested data type <typeparamref name="T"/>.</para>
 			///		<para>If the conversion fails, writes <paramref name="errorMessage"/> to <see cref="System.Console"/>, removes <see cref="System.Console.ReadLine"/>'s input from <see cref="System.Console"/>, and loops.</para>
-			///		<para><see cref="ReadLineLoop{Task}(string , string)"/> can have 1 to 2 <see langword="params"/>.</para>
+			///		<para><see cref="ReadLineLoop{Task}(string , string, bool)"/> can have 1 to 3 <see langword="params"/>.</para>
 			/// </summary>
 			/// <typeparam name="T"></typeparam>
 			/// <param name="prompt"></param>
 			/// <param name="errorMessage"></param>
 			public static T? ReadLineLoop<T>(string prompt, string errorMessage) {
+				return ReadLineLoop<T>(prompt, errorMessage, false);
+			}
+
+			/// <summary>
+			///		<para>Writes <paramref name="prompt"/> to <see cref="System.Console"/> and then attempts to convert <see cref="System.Console.ReadLine"/> output to the requested data type <typeparamref name="T"/>.</para>
+			///		<para>If the conversion fails, writes <paramref name="errorMessage"/> to <see cref="System.Console"/>, removes <see cref="System.Console.ReadLine"/>'s input from <see cref="System.Console"/>, and loops.</para>
+			///		<para>If <paramref name="nullable"/> is set to <see langword="true"/>, then empty <see cref="System.Console.ReadLine"/> outputs will count as a valid input to convert.</para>
+			///		<para><see cref="ReadLineLoop{Task}(string , string, bool)"/> can have 1 to 3 <see langword="params"/>.</para>
+			/// </summary>
+			/// <typeparam name="T"></typeparam>
+			/// <param name="prompt"></param>
+			/// <param name="errorMessage"></param>
+			/// <param name="nullable"></param>
+			public static T? ReadLineLoop<T>(string prompt, string errorMessage, bool nullable) {
 				// Writes Prompt
 				System.Console.Write(prompt);
 
@@ -41,7 +55,25 @@ namespace MyLibrary {
 				int[] errorCursorPos = [-1, -1];
 				bool isConverted = false;
 				bool userDidError = false;
-				string readLineResult;
+				string readLineResult = "";
+
+				// Declares Delegate For Error Correction
+				Action errorCorrection = new Action(() => {
+					// Erases User Input
+					System.Console.SetCursorPosition(currentCursorPos[0], currentCursorPos[1]);
+					Console.Erase(readLineResult.Length, true);
+					System.Console.WriteLine();
+					// Notes That User Made Error And Tracks Console Cursor Position At Beginning Of Error Message
+					isConverted = false;
+					if (!userDidError) {
+						userDidError = true;
+						errorCursorPos = [System.Console.CursorLeft, System.Console.CursorTop];
+						// Writes Error Message
+						System.Console.Write(errorMessage);
+					}
+					// Resets Console Cursor Position And Allows User To Try Again
+					System.Console.SetCursorPosition(currentCursorPos[0], currentCursorPos[1]);
+				});
 
 				// While User Input Is Not Converted
 				while (!isConverted) {
@@ -54,27 +86,16 @@ namespace MyLibrary {
 							// Conversion Method
 							returnVar = TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(readLineResult);
 							isConverted = true;
+						} else if (!nullable) {
+							// ReadLine Returned Empty; Preforms Correction Without Needing To Throw Exception
+							errorCorrection();
 						} else {
-							// ReadLine Returned Empty; Throws Exception
-							throw new Exception();
+							returnVar = default(T);
+							isConverted = true;
 						}
 					} catch {
-						// Erases User Input
-						System.Console.SetCursorPosition(currentCursorPos[0], currentCursorPos[1]);
-						System.Console.Write(new string(' ', readLineResult.Length) + "\n");
-
-						// Notes That User Made Error And Tracks Console Cursor Position At Beginning Of Error Message
-						isConverted = false;
-						if (!userDidError) {
-							userDidError = true;
-							errorCursorPos = [System.Console.CursorLeft, System.Console.CursorTop];
-
-							// Writes Error Message
-							System.Console.Write(errorMessage);
-						}
-
-						// Resets Console Cursor Position And Allows User To Try Again
-						System.Console.SetCursorPosition(currentCursorPos[0], currentCursorPos[1]);
+						// Preforms Error Correction
+						errorCorrection();
 					}
 				}
 
@@ -82,8 +103,7 @@ namespace MyLibrary {
 				if (userDidError) {
 					// Erases Previous Error Message
 					System.Console.SetCursorPosition(errorCursorPos[0], errorCursorPos[1]);
-					System.Console.Write(new string(' ', errorMessage.Length));
-					System.Console.SetCursorPosition(errorCursorPos[0], errorCursorPos[1]);
+					Console.Erase(errorMessage.Length, true);
 				}
 
 				// Returns Converted ReadLine
