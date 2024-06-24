@@ -15,7 +15,7 @@ namespace MyLibrary {
 			/// <summary>
 			///		<para>Writes <paramref name="prompt"/> to <see cref="System.Console"/> and then attempts to convert <see cref="System.Console.ReadLine"/> to the requested data type <typeparamref name="T"/>.</para>
 			///		<para>If the conversion fails, writes a generic error to <see cref="System.Console"/>, removes <see cref="System.Console.ReadLine"/>'s input from <see cref="System.Console"/>, and loops.</para>
-			///		<para><see cref="ReadLineLoop{Task}(string, string, bool)"/> can have 1 to 3 <see langword="params"/>.</para>
+			///		<para><see cref="ReadLineLoop{T}(string, string, bool)"/> can have 1 to 3 <see langword="params"/>.</para>
 			/// </summary>
 			/// <typeparam name="T"></typeparam>
 			/// <param name="prompt"></param>
@@ -26,7 +26,7 @@ namespace MyLibrary {
 			/// <summary>
 			///		<para>Writes <paramref name="prompt"/> to <see cref="System.Console"/> and then attempts to convert <see cref="System.Console.ReadLine"/> output to the requested data type <typeparamref name="T"/>.</para>
 			///		<para>If the conversion fails, writes <paramref name="errorMessage"/> to <see cref="System.Console"/>, removes <see cref="System.Console.ReadLine"/>'s input from <see cref="System.Console"/>, and loops.</para>
-			///		<para><see cref="ReadLineLoop{Task}(string , string, bool)"/> can have 1 to 3 <see langword="params"/>.</para>
+			///		<para><see cref="ReadLineLoop{T}(string , string, bool)"/> can have 1 to 3 <see langword="params"/>.</para>
 			/// </summary>
 			/// <typeparam name="T"></typeparam>
 			/// <param name="prompt"></param>
