@@ -13,6 +13,45 @@ namespace MyLibrary {
 		public class Convert() {
 
 			/// <summary>
+			///		<para>Converts an <see cref="int"/> <paramref name="number"/> into a <see cref="string"/> containing the <paramref name="number"/>'s english ordinal.</para>
+			///		<para>Returns <see langword="null"/> if the <paramref name="number"/> has no english ordinal.</para>
+			///		<para><see cref="Ordinal"/> must have exactly 1 <see langword="param"/>.</para>
+			/// </summary>
+			/// <param name="number"></param>
+			public static string? Ordinal(int number) {
+				// Checks If Int Is Not An Ordinal
+				if (number <= 0) {
+					return null;
+				}
+
+				// Checks if Int Is The 11th, 12th, Or 13th Of Each 100 And Adds Proper Ordinal If So
+				switch (number % 100) {
+					case 11:
+					case 12:
+					case 13:
+						return number + "th";
+				}
+
+				// Checks Int And Adds Proper Ordinal
+				switch (number % 10) {
+					case 1:
+						return number + "st";
+					case 2:
+						return number + "nd";
+					case 3:
+						return number + "rd";
+					default:
+						return number + "th";
+				}
+			}
+		}
+
+		/// <summary>
+		///		<see cref="MyLib"/>.<see cref="Console"/> contains all of <see cref="MyLib"/>'s console <see langword="methods"/>.
+		/// </summary>
+		public class Console() {
+
+			/// <summary>
 			///		<para>Writes <paramref name="prompt"/> to <see cref="System.Console"/> and then attempts to convert <see cref="System.Console.ReadLine"/> to the requested data type <typeparamref name="T"/>.</para>
 			///		<para>If the conversion fails, writes a generic error to <see cref="System.Console"/>, removes <see cref="System.Console.ReadLine"/>'s input from <see cref="System.Console"/>, and loops.</para>
 			///		<para><see cref="ReadLineLoop{T}(string, string, bool)"/> can have 1 to 3 <see langword="params"/>.</para>
@@ -109,45 +148,6 @@ namespace MyLibrary {
 				// Returns Converted ReadLine
 				return returnVar;
 			}
-
-			/// <summary>
-			///		<para>Converts an <see cref="int"/> <paramref name="number"/> into a <see cref="string"/> containing the <paramref name="number"/>'s english ordinal.</para>
-			///		<para>Returns <see langword="null"/> if the <paramref name="number"/> has no english ordinal.</para>
-			///		<para><see cref="Ordinal"/> must have exactly 1 <see langword="param"/>.</para>
-			/// </summary>
-			/// <param name="number"></param>
-			public static string? Ordinal(int number) {
-				// Checks If Int Is Not An Ordinal
-				if (number <= 0) {
-					return null;
-				}
-
-				// Checks if Int Is The 11th, 12th, Or 13th Of Each 100 And Adds Proper Ordinal If So
-				switch (number % 100) {
-					case 11:
-					case 12:
-					case 13:
-						return number + "th";
-				}
-
-				// Checks Int And Adds Proper Ordinal
-				switch (number % 10) {
-					case 1:
-						return number + "st";
-					case 2:
-						return number + "nd";
-					case 3:
-						return number + "rd";
-					default:
-						return number + "th";
-				}
-			}
-		}
-
-		/// <summary>
-		///		<see cref="MyLib"/>.<see cref="Console"/> contains all of <see cref="MyLib"/>'s console <see langword="methods"/>.
-		/// </summary>
-		public class Console() {
 
 			/// <summary>
 			///		<para>Moves <see cref="System.Console"/> cursor 1 position backwards and removes <see cref="char"/> on that position.</para>
