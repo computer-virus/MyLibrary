@@ -500,6 +500,20 @@ namespace MyLibrary {
 			public static void Delete(string path) {
 				System.IO.File.Delete(path);
 			}
+
+			/// <summary>
+			///		<para>Returns <see langword="true"/> if file with a path of <see cref="string"/> <paramref name="path"/> is empty.</para>
+			///		<para>Otherwise, returns <see langword="false"/>.</para>
+			///		<para><see cref="isEmpty(string)"/> must have exactly 1 <see langword="param"/>.</para>
+			/// </summary>
+			/// <param name="path"></param>
+			public static bool IsEmpty(string path) {
+				string[] fileLines = System.IO.File.ReadAllText(path).Split(Environment.NewLine);
+				if (fileLines.Length == 1 && fileLines[0].Equals("")) {
+					return true;
+				}
+				return false;
+			}
 		}
 
 		/// <summary>
