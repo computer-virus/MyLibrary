@@ -423,5 +423,153 @@ namespace MyLibrary {
 				return false;
 			}
 		}
+
+		/// <summary>
+		///		<see cref="MyLib"/>.<see cref="File"/> contains all of <see cref="MyLib"/>'s relative location file <see langword="methods"/>.
+		/// </summary>
+		public class File {
+
+			/// <summary>
+			///		<para>Gets the executable's path in the directory as a <see cref="string"/> for the relative file <see langword="methods"/>.</para>
+			/// </summary>
+			private static readonly string? EXEC_DIR = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+			/// <summary>
+			///		<para>Attempts to find a relative location file with the name of <see cref="string"/> <paramref name="fileName"/> and returns the file's path as a <see cref="string"/>.</para>
+			///		<para>Creates the file if the relative location file does not exist.</para>
+			///		<para><see cref="Use(string, string)"/> can have 1 to 2 <see langword="params"/>.</para>
+			/// </summary>
+			/// <param name="fileName"></param>
+			public static string Use(string fileName) {
+				string fileDir = $@"{EXEC_DIR}\{fileName}";
+
+				if (!System.IO.File.Exists(fileDir)) {
+					System.IO.File.Create(fileDir).Close();
+				}
+
+				return fileDir;
+			}
+
+			/// <summary>
+			///		<para>Attempts to find a relative location file with the name of <see cref="string"/> <paramref name="fileName"/> in a relative location folder with a path of <see cref="string"/> <paramref name="folderPath"/> and returns the file's path as a <see cref="string"/>.</para>
+			///		<para>Creates the folder(s) and files if their respective relative location does not exist.</para>
+			///		<para><see cref="Use(string, string)"/> can have 1 to 2 <see langword="params"/>.</para>
+			/// </summary>
+			/// <param name="folderPath"></param>
+			/// <param name="fileName"></param>
+			/// <returns></returns>
+			public static string Use(string folderPath, string fileName) {
+				string fileDir = $@"{folderPath}\{fileName}";
+
+				if (!System.IO.Directory.Exists(folderPath)) {
+					System.IO.Directory.CreateDirectory(folderPath);
+				}
+
+				if (!System.IO.File.Exists(fileDir)) {
+					System.IO.File.Create(fileDir).Close();
+				}
+
+				return fileDir;
+			}
+
+			/// <summary>
+			///		<para>Reads a file with a path of <see cref="string"/> <paramref name="path"/> and returns a <see cref="string"/>[] with each file line on the <see cref="string"/>[]'s corresponding index.</para>
+			///		<para><see cref="Read(string)"/> must have exactly 1 <see langword="param"/>.</para>
+			/// </summary>
+			/// <param name="path"></param>
+			/// <returns></returns>
+			public static string[] Read(string path) {
+				return System.IO.File.ReadAllText(path).Split(Environment.NewLine);
+			}
+
+			/// <summary>
+			///		<para>Writes <see cref="string"/>[] <paramref name="lines"/> on the corresponding lines of a file with a path of <see cref="string"/> <paramref name="path"/>.</para>
+			///		<para><see cref="Write(string, string[])"/> must have exactly 2 <see langword="params"/>.</para>
+			/// </summary>
+			/// <param name="path"></param>
+			/// <param name="lines"></param>
+			public static void Write(string path, string[] lines) {
+				System.IO.File.WriteAllText(path, string.Join(Environment.NewLine, lines));
+			}
+
+			/// <summary>
+			///		<para>Deletes a file with a path of <see cref="string"/> <paramref name="path"/>.</para>
+			///		<para><see cref="Delete(string)"/> must have exactly 1 <see langword="param"/>.</para>
+			/// </summary>
+			/// <param name="path"></param>
+			public static void Delete(string path) {
+				System.IO.File.Delete(path);
+			}
+		}
+
+		/// <summary>
+		///		<see cref="MyLib"/>.<see cref="Folder"/> contains all of <see cref="MyLib"/>'s relative location folder <see langword="methods"/>.
+		/// </summary>
+		public class Folder {
+
+			/// <summary>
+			///		<para>Gets the executable's path in the directory as a <see cref="string"/> for the relative folder <see langword="methods"/>.</para>
+			/// </summary>
+			private static readonly string? EXEC_DIR = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+			/// <summary>
+			///		<para>Attempts to find a relative location folder with the name of <see cref="string"/> <paramref name="folderName"/> and returns the folder's path as a <see cref="string"/>.</para>
+			///		<para><see cref="Use(string)"/> must have exactly 1 <see langowrd="param"/> but it can be switched for a <see cref="string"/>[].</para>
+			/// </summary>
+			/// <param name="folderName"></param>
+			/// <returns></returns>
+			public static string Use(string folderName) {
+				string folderPath = $@"{EXEC_DIR}\{folderName}";
+
+				if (!Directory.Exists(folderPath)) {
+					Directory.CreateDirectory(folderPath);
+				}
+
+				return folderPath;
+			}
+
+			/// <summary>
+			///		<para>Attempts to find all relative location folders with the names of <see cref="string"/>[] <paramref name="nestedFolderNames"/> and returns the folders' paths as a <see cref="string"/>[].</para>
+			///		<para><see cref="Use(string[])"/> must have exactly 1 <see langowrd="param"/> but it can be switched for a <see cref="string"/>.</para>
+			/// </summary>
+			/// <param name="nestedFolderNames"></param>
+			/// <returns></returns>
+			public static string[] Use(string[] nestedFolderNames) {
+				string finalFolderPath = $@"{EXEC_DIR}\{string.Join(@"\", nestedFolderNames)}";
+				string? currentFolderPath = EXEC_DIR;
+				string[] folderPaths = new string[nestedFolderNames.Length];
+
+				if (!Directory.Exists(finalFolderPath)) {
+					Directory.CreateDirectory(finalFolderPath);
+				}
+
+				for (int i = 0; i < nestedFolderNames.Length; i++) {
+					currentFolderPath += $@"\{nestedFolderNames[i]}";
+					folderPaths[i] = currentFolderPath;
+				}
+
+				return folderPaths;
+			}
+
+			/// <summary>
+			///		<para>Deletes a folder with a path of <see cref="string"/> <paramref name="path"/>.</para>
+			///		<para><see cref="Delete(string)"/> must have exactly 1 <see langword="param"/>.</para>
+			/// </summary>
+			/// <param name="path"></param>
+			public static void Delete(string path) {
+				Directory.Delete(path);
+			}
+
+			/// <summary>
+			///		<para>Deletes all folders with paths of <see cref="string"/>[] <paramref name="paths"/>.</para>
+			///		<para><see cref="Delete(string[])"/> must have exactly 1 <see langword="param"/>.</para>
+			/// </summary>
+			/// <param name="paths"></param>
+			public static void Delete(string[] paths) {
+				for (int i = paths.Length - 1; i >= 0; i--) {
+					Directory.Delete(paths[i]);
+				}
+			}
+		}
 	}
 }
