@@ -423,5 +423,22 @@ namespace MyLibrary {
 				return false;
 			}
 		}
+
+		/// <summary>
+		///		<see cref="MyLib"/>.<see cref="File"/> contains all of <see cref="MyLib"/>'s file <see langword="methods"/>.
+		/// </summary>
+		public class File() {
+
+			/// <summary>
+			///		<para>Creates a new file with a path of <see cref="string"/> <paramref name="path"/>, writes <see cref="string"/>[] <paramref name="contents"/> to the file, and then closes the file.</para>
+			///		<para>If the file already exists, it gets overwritten.</para>
+			///		<para><see cref="WriteAllLines(string, string[])"/> must have exactly 2 <see langword="params"/>.</para>
+			/// </summary>
+			/// <param name="path"></param>
+			/// <param name="contents"></param>
+			public static void WriteAllLines(string path, string[] contents) {
+				System.IO.File.WriteAllText(path, string.Join(Environment.NewLine, contents));
+			}
+		}
 	}
 }
