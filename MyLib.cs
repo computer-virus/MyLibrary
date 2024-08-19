@@ -453,5 +453,30 @@ namespace MyLibrary {
 				Process.Start(file);
 			}
 		}
+
+		/// <summary>
+		///		<see cref="MyLib"/>.<see cref="Array"/> contains all of <see cref="MyLib"/>'s array <see langword="methods"/>.
+		/// </summary>
+		public class Array() {
+
+			/// <summary>
+			///		<para>Counts the number of occurrences of <typeparamref name="T"/> <paramref name="value"/> in <typeparamref name="T"/>[] <paramref name="array"/> and returns result as an <see cref="int"/>.</para>
+			///		<para><see cref="CountOccurrences{T}(T, T[])"/> must have exactly 2 <see langword="params"/>.</para>
+			/// </summary>
+			/// <typeparam name="T"></typeparam>
+			/// <param name="value"></param>
+			/// <param name="array"></param>
+			public static int CountOccurrences<T>(T value, T[] array) {
+				int count = 0;
+				
+				foreach (T item in array) {
+					if (item != null && item.Equals(value)) {
+						count++;
+					}
+				}
+
+				return count;
+			}
+		}
 	}
 }
