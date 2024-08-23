@@ -440,24 +440,40 @@ namespace MyLibrary {
 			public static void WriteAllLines(string path, string[] contents) {
 				System.IO.File.WriteAllText(path, string.Join(Environment.NewLine, contents));
 			}
-		}
-
-		/// <summary>
-		///		<see cref="MyLib"/>.<see cref="File"/> contains all of <see cref="MyLib"/>'s File Explorer <see langword="methods"/>.
-		/// </summary>
-		public class Explorer() {
 
 			/// <summary>
-			///		<para>Opens the <paramref name="directory"/> on a File Explorer window without creating a new instance of File Explorer.</para>
-			///		<para><see cref="OpenDirectory(string)"/> must have exactly 1 <see langword="param"/>.</para>
+			///		<para>Opens a file, directory, or url using the given <paramref name="path"/>, <paramref name="arguments"/>, and <paramref name="verb"/>.</para>
+			///		<para><see cref="Open(string, string, string)"/> can have 1 to 3 <see langword="params"/>.</para>
 			/// </summary>
-			/// <param name="directory"></param>
-			public static void OpenDirectory(string directory) {
-				Process.Start(new ProcessStartInfo() {
-					FileName = directory,
+			/// <param name="path"></param>
+			/// <param name="arguments"></param>
+			/// <param name="verb"></param>
+			public static void Open(string path, string arguments, string verb) {
+				Process.Start(new ProcessStartInfo {
+					FileName = path,
+					Arguments = arguments,
 					UseShellExecute = true,
-					Verb = "open"
+					Verb = verb
 				});
+			}
+
+			/// <summary>
+			///		<para>Opens a file, directory, or url using the given <see cref="string"/> <paramref name="path"/> and <see cref="string"/> <paramref name="arguments"/>.</para>
+			///		<para><see cref="Open(string, string, string)"/> can have 1 to 3 <see langword="params"/>.</para>
+			/// </summary>
+			/// <param name="path"></param>
+			/// <param name="arguments"></param>
+			public static void Open(string path, string arguments) {
+				Open(path, arguments, "");
+			}
+
+			/// <summary>
+			///		<para>Opens a file, directory, or url using the given <see cref="string"/> <paramref name="path"/>.</para>
+			///		<para><see cref="Open(string, string, string)"/> can have 1 to 3 <see langword="params"/>.</para>
+			/// </summary>
+			/// <param name="path"></param>
+			public static void Open(string path) {
+				Open(path, "", "");
 			}
 		}
 
