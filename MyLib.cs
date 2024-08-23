@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 
 namespace MyLibrary {
 
@@ -438,6 +439,25 @@ namespace MyLibrary {
 			/// <param name="contents"></param>
 			public static void WriteAllLines(string path, string[] contents) {
 				System.IO.File.WriteAllText(path, string.Join(Environment.NewLine, contents));
+			}
+		}
+
+		/// <summary>
+		///		<see cref="MyLib"/>.<see cref="File"/> contains all of <see cref="MyLib"/>'s File Explorer <see langword="methods"/>.
+		/// </summary>
+		public class Explorer() {
+
+			/// <summary>
+			///		<para>Opens the <paramref name="directory"/> on a File Explorer window without creating a new instance of File Explorer.</para>
+			///		<para><see cref="OpenDirectory(string)"/> must have exactly 1 <see langword="param"/>.</para>
+			/// </summary>
+			/// <param name="directory"></param>
+			public static void OpenDirectory(string directory) {
+				Process.Start(new ProcessStartInfo() {
+					FileName = directory,
+					UseShellExecute = true,
+					Verb = "open"
+				});
 			}
 		}
 
