@@ -442,7 +442,7 @@ namespace MyLibrary {
 			}
 
 			/// <summary>
-			///		<para>Opens a file, directory, or url using the given <paramref name="path"/>, <paramref name="arguments"/>, and <paramref name="verb"/>.</para>
+			///		<para>Opens a file, directory, or url using the given <see cref="string"/> <paramref name="path"/>, <see cref="string"/> <paramref name="arguments"/>, and <see cref="string"/> <paramref name="verb"/>.</para>
 			///		<para><see cref="Open(string, string, string)"/> can have 1 to 3 <see langword="params"/>.</para>
 			/// </summary>
 			/// <param name="path"></param>
