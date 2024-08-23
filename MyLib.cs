@@ -440,18 +440,6 @@ namespace MyLibrary {
 			public static void WriteAllLines(string path, string[] contents) {
 				System.IO.File.WriteAllText(path, string.Join(Environment.NewLine, contents));
 			}
-
-			/// <summary>
-			///		<para>Launches an existing file with a path of <see cref="string"/> <paramref name="path"/> as an application.</para>
-			///		<para>Use <paramref name="arguments"/> to launch the application using command line arguments.</para>
-			///		<para><see cref="Start(string, string)"/> must have exactly 2 <see langword="params"/>.</para>
-			/// </summary>
-			/// <param name="path"></param>
-			/// <param name="arguments"></param>
-			public static void Start(string path, string arguments) {
-				ProcessStartInfo file = new ProcessStartInfo(path, arguments);
-				Process.Start(file);
-			}
 		}
 
 		/// <summary>
