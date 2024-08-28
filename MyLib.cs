@@ -157,7 +157,7 @@ namespace MyLibrary {
 						userDidError = true;
 						errorCursorPos = [System.Console.CursorLeft, System.Console.CursorTop];
 						// Writes Error Message
-						System.Console.Write(errorMessage);
+						Console.ColorWrite(errorMessage, ConsoleColor.Red);
 					}
 					// Resets Console Cursor Position And Allows User To Try Again
 					System.Console.SetCursorPosition(currentCursorPos[0], currentCursorPos[1]);
@@ -307,6 +307,46 @@ namespace MyLibrary {
 				vShift = Math.Min(vShift, System.Console.WindowHeight - 1);
 
 				System.Console.SetCursorPosition(hShift, vShift);
+			}
+
+			/// <summary>
+			///		<para>Writes the specified <see cref="string"/> <paramref name="value"/> to the standard output stream in the given <see cref="ConsoleColor"/> <paramref name="color"/>.</para>
+			///		<para><see cref="ColorWrite(string, ConsoleColor)"/> must have exactly 2 <see langword="params"/>.</para>
+			/// </summary>
+			/// <param name="value"></param>
+			/// <param name="color"></param>
+			public static void ColorWrite(string value, ConsoleColor color) {
+				ConsoleColor origCol = System.Console.ForegroundColor;
+
+				System.Console.ForegroundColor = color;
+				System.Console.Write(value);
+				System.Console.ForegroundColor = origCol;
+			}
+
+			/// <summary>
+			///		<para>Writes the specified <see cref="string"/> <paramref name="value"/>, followed by the current line terminator, to the standard output stream in the given <see cref="ConsoleColor"/> <paramref name="color"/>.</para>
+			///		<para><see cref="ColorWriteLine(string, ConsoleColor)"/> must have exactly 2 <see langword="params"/>.</para>
+			/// </summary>
+			/// <param name="value"></param>
+			/// <param name="color"></param>
+			public static void ColorWriteLine(string value, ConsoleColor color) {
+				ColorWrite(value + Environment.NewLine, color);
+			}
+
+			/// <summary>
+			///		<para>Reads the next line of character from the standard input stream.</para>
+			///		<para>Manual inputs to the stream will be colored in the given <see cref="ConsoleColor"/> <paramref name="color"/>.</para>
+			///		<para><see cref="ColorReadLine(ConsoleColor)"/> must have exactly 1 <see langword="param"/>.</para>
+			/// </summary>
+			/// <param name="color"></param>
+			public static string? ColorReadLine(ConsoleColor color) {
+				ConsoleColor origCol = System.Console.ForegroundColor;
+
+				System.Console.ForegroundColor = color;
+				string? input = System.Console.ReadLine();
+				System.Console.ForegroundColor = origCol;
+
+				return input;
 			}
 		}
 
