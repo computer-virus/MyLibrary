@@ -20,7 +20,6 @@ namespace MyLibrary {
 			///		<para><see cref="ToSuperscript"/> must have exactly 1 <see langword="param"/>.</para>
 			/// </summary>
 			/// <param name="number"></param>
-			/// <returns></returns>
 			public static char ToSuperscript(int number) {
 				switch (number) {
 					default:
@@ -56,7 +55,6 @@ namespace MyLibrary {
 			///		<para><see cref="ToSubscript"/> must have exactly 1 <see langword="param"/>.</para>
 			/// </summary>
 			/// <param name="number"></param>
-			/// <returns></returns>
 			public static char ToSubscript(int number) {
 				return (char)(0x2080 + number);
 			}
@@ -414,6 +412,73 @@ namespace MyLibrary {
 			/// <param name="rand"></param>
 			public static char NextChar(string charPool, System.Random rand) {
 				return charPool[rand.Next(charPool.Length)];
+			}
+			
+			/// <summary>
+			///		<para>Creates a random <see cref="string"/> with a length of <see cref="int"/> <paramref name="length"/> using <see cref="char"/>s from <see cref="ALLKEYBOARDCHARS"/>.</para>
+			///		<para><see cref="NextString(int, string, System.Random)"/> can have 1 to 3 <see langword="params"/> but the <see cref="string"/> <see langword="param"/> can be switched for a <see cref="char"/>[] to make <see cref="NextString(int, char[], System.Random)"/></para>
+			/// </summary>
+			/// <param name="length"></param>
+			public static string NextString(int length) {
+				return NextString(length, ALLKEYBOARDCHARS, new System.Random());
+			}
+
+			/// <summary>
+			///		<para>Creates a random <see cref="string"/> with a length of <see cref="int"/> <paramref name="length"/> using <see cref="char"/>s from <see cref="string"/> <paramref name="charPool"/>.</para>
+			///		<para><see cref="NextString(int, string, System.Random)"/> can have 1 to 3 <see langword="params"/> but the <see cref="string"/> <see langword="param"/> can be switched for a <see cref="char"/>[] to make <see cref="NextString(int, char[], System.Random)"/></para>
+			/// </summary>
+			/// <param name="length"></param>
+			/// <param name="charPool"></param>
+			public static string NextString(int length, string charPool) {
+				return NextString(length, charPool, new System.Random());
+			}
+
+			/// <summary>
+			///		<para>Creates a random <see cref="string"/> with a length of <see cref="int"/> <paramref name="length"/> using <see cref="char"/>[] <paramref name="charPool"/>.</para>
+			///		<para><see cref="NextString(int, char[], System.Random)"/> can have 1 to 3 <see langword="params"/> but the <see cref="char"/>[] <see langword="param"/> can be switched for a <see cref="string"/> to make <see cref="NextString(int, char[], System.Random)"/></para>
+			/// </summary>
+			/// <param name="length"></param>
+			/// <param name="charPool"></param>
+			public static string NextString(int length, char[] charPool) {
+				return NextString(length, string.Concat(charPool), new System.Random());
+			}
+
+			/// <summary>
+			///		<para>Creates a random <see cref="string"/> with a length of <see cref="int"/> <paramref name="length"/> using <see cref="System.Random"/> <paramref name="rand"/> and <see cref="char"/>s from <see cref="ALLKEYBOARDCHARS"/>.</para>
+			///		<para><see cref="NextString(int, string, System.Random)"/> can have 1 to 3 <see langword="params"/> but the <see cref="string"/> <see langword="param"/> can be switched for a <see cref="char"/>[] to make <see cref="NextString(int, char[], System.Random)"/></para>
+			/// </summary>
+			/// <param name="length"></param>
+			/// <param name="rand"></param>
+			public static string NextString(int length, System.Random rand) {
+				return NextString(length, ALLKEYBOARDCHARS, rand);
+			}
+
+			/// <summary>
+			///		<para>Creates a random <see cref="string"/> with a length of <see cref="int"/> <paramref name="length"/> using <see cref="System.Random"/> <paramref name="rand"/> and <see cref="char"/>[] <paramref name="charPool"/>.</para>
+			///		<para><see cref="NextString(int, char[], System.Random)"/> can have 1 to 3 <see langword="params"/> but the <see cref="char"/>[] <see langword="param"/> can be switched for a <see cref="string"/> to make <see cref="NextString(int, char[], System.Random)"/></para>
+			/// </summary>
+			/// <param name="length"></param>
+			/// <param name="charPool"></param>
+			/// <param name="rand"></param>
+			public static string NextString(int length, char[] charPool, System.Random rand) {
+				return NextString(length, string.Concat(charPool), rand);
+			}
+
+			/// <summary>
+			///		<para>Creates a random <see cref="string"/> with a length of <see cref="int"/> <paramref name="length"/> using <see cref="System.Random"/> <paramref name="rand"/> and <see cref="char"/>s from <see cref="string"/> <paramref name="charPool"/>.</para>
+			///		<para><see cref="NextString(int, string, System.Random)"/> can have 1 to 3 <see langword="params"/> but the <see cref="string"/> <see langword="param"/> can be switched for a <see cref="char"/>[] to make <see cref="NextString(int, char[], System.Random)"/></para>
+			/// </summary>
+			/// <param name="length"></param>
+			/// <param name="charPool"></param>
+			/// <param name="rand"></param>
+			public static string NextString(int length, string charPool, System.Random rand) {
+				string randString = "";
+
+				for (int i = 0; i < length; i++) {
+					randString += charPool[rand.Next(charPool.Length)];
+				}
+
+				return randString;
 			}
 
 			/// <summary>
