@@ -6,12 +6,12 @@ namespace MyLibrary {
 	/// <summary>
 	/// <see cref="MyLib"/> contains all of Edward Tagliapietra's personal custom methods.
 	/// </summary>
-	public class MyLib() {
+	public static class MyLib {
 
 		/// <summary>
 		///		<see cref="Convert"/> contains all of <see cref="MyLib"/>'s custom conversion <see langword="methods"/>.
 		/// </summary>
-		public class Convert() {
+		public static class Convert {
 
 			/// <summary>
 			///		<para>Converts a non-negative single digit <see cref="int"/> <paramref name="number"/> into a <see cref="char"/> containing the <paramref name="number"/> in superscript.</para>
@@ -96,7 +96,7 @@ namespace MyLibrary {
 		/// <summary>
 		///		<see cref="MyLib"/>.<see cref="Console"/> contains all of <see cref="MyLib"/>'s console <see langword="methods"/>.
 		/// </summary>
-		public class Console() {
+		public static class Console {
 
 			/// <summary>
 			///		<para>Writes <paramref name="prompt"/> to <see cref="System.Console"/> and then attempts to convert <see cref="System.Console.ReadLine"/> to the requested data type <typeparamref name="T"/>.</para>
@@ -351,7 +351,7 @@ namespace MyLibrary {
 		/// <summary>
 		///		<see cref="MyLib"/>.<see cref="Random"/> contains all of <see cref="MyLib"/>'s random <see langword="methods"/>.
 		/// </summary>
-		public class Random() {
+		public static class Random {
 
 			/// <summary>
 			///		<para>Default value for <see cref="NextChar()"/> and <see cref="NextChar(System.Random)"/>.</para>
@@ -413,7 +413,7 @@ namespace MyLibrary {
 			public static char NextChar(string charPool, System.Random rand) {
 				return charPool[rand.Next(charPool.Length)];
 			}
-			
+
 			/// <summary>
 			///		<para>Creates a random <see cref="string"/> with a length of <see cref="int"/> <paramref name="length"/> using <see cref="char"/>s from <see cref="ALLKEYBOARDCHARS"/>.</para>
 			///		<para><see cref="NextString(int, string, System.Random)"/> can have 1 to 3 <see langword="params"/> but the <see cref="string"/> <see langword="param"/> can be switched for a <see cref="char"/>[] to make <see cref="NextString(int, char[], System.Random)"/></para>
@@ -533,7 +533,7 @@ namespace MyLibrary {
 		/// <summary>
 		///		<see cref="MyLib"/>.<see cref="File"/> contains all of <see cref="MyLib"/>'s file <see langword="methods"/>.
 		/// </summary>
-		public class File() {
+		public static class File {
 
 			/// <summary>
 			///		<para>Creates a new file with a path of <see cref="string"/> <paramref name="path"/>, writes <see cref="string"/>[] <paramref name="contents"/> to the file, and then closes the file.</para>
@@ -585,7 +585,7 @@ namespace MyLibrary {
 		/// <summary>
 		///		<see cref="MyLib"/>.<see cref="Array"/> contains all of <see cref="MyLib"/>'s array <see langword="methods"/>.
 		/// </summary>
-		public class Array() {
+		public static class Array {
 
 			/// <summary>
 			///		<para>Counts the number of occurrences of <typeparamref name="T"/> <paramref name="value"/> in <typeparamref name="T"/>[] <paramref name="array"/> and returns result as an <see cref="int"/>.</para>
@@ -596,7 +596,7 @@ namespace MyLibrary {
 			/// <param name="array"></param>
 			public static int CountOccurrences<T>(T value, T[] array) {
 				int count = 0;
-				
+
 				foreach (T item in array) {
 					if (item != null && item.Equals(value)) {
 						count++;
