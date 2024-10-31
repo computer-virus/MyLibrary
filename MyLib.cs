@@ -606,5 +606,61 @@ namespace MyLibrary {
 				return count;
 			}
 		}
+
+		public static class Prime {
+			public static bool Check(int number) {
+				if (number < 2) {
+					return false;
+				}
+
+				if (number == 2) {
+					return true;
+				}
+
+				if (number % 2 == 0) {
+					return false;
+				}
+
+				int upperBounds = (int)Math.Ceiling(Math.Sqrt(number));
+				
+				for (int i = 3; i < upperBounds; i += 2) {
+					if (number % i == 0) {
+						return false;
+					}
+				}
+
+				return true;
+			}
+
+			public static List<int> GetList(int size) {
+				if (size < 0) {
+					throw new ArgumentOutOfRangeException($"{nameof(size)} must be a positive integer.");
+				}
+			
+				if (size == 0) {
+					return [];
+				}
+
+				List<int> primes = [2];
+
+				for (int i = 3; primes.Count < size; i += 2) {
+					foreach (int prime in primes) {
+						if (i % prime != 0) {
+							throw new NotImplementedException($"This method has not been fully implemented yet.");
+						}
+					}
+				}
+
+				return primes;
+			}
+
+			public static int GetNth(int n) {
+				if (n < 1) {
+					throw new ArgumentOutOfRangeException($"{nameof(n)} must be an integer greater than 0.");
+				}
+
+				return GetList(n)[n - 1];
+			}
+		}
 	}
 }
