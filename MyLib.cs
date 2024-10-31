@@ -622,7 +622,7 @@ namespace MyLibrary {
 				}
 
 				int upperBounds = (int)Math.Ceiling(Math.Sqrt(number));
-				
+
 				for (int i = 3; i < upperBounds; i += 2) {
 					if (number % i == 0) {
 						return false;
@@ -636,7 +636,7 @@ namespace MyLibrary {
 				if (size < 0) {
 					throw new ArgumentOutOfRangeException($"{nameof(size)} must be a positive integer.");
 				}
-			
+
 				if (size == 0) {
 					return [];
 				}
@@ -644,10 +644,17 @@ namespace MyLibrary {
 				List<int> primes = [2];
 
 				for (int i = 3; primes.Count < size; i += 2) {
+					bool valid = true;
+
 					foreach (int prime in primes) {
-						if (i % prime != 0) {
-							throw new NotImplementedException($"This method has not been fully implemented yet.");
+						if (i % prime == 0) {
+							valid = false;
+							break;
 						}
+					}
+
+					if (valid) {
+						primes.Add(i);
 					}
 				}
 
