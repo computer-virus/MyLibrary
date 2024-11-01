@@ -621,9 +621,9 @@ namespace MyLibrary {
 					return false;
 				}
 
-				int upperBounds = (int)Math.Ceiling(Math.Sqrt(number));
+				int upperBounds = (int)Math.Floor(Math.Sqrt(number));
 
-				for (int i = 3; i < upperBounds; i += 2) {
+				for (int i = 3; i <= upperBounds; i += 2) {
 					if (number % i == 0) {
 						return false;
 					}
@@ -639,6 +639,10 @@ namespace MyLibrary {
 
 				if (size == 0) {
 					return [];
+				}
+
+				if (size == 1) {
+					return [2];
 				}
 
 				List<int> primes = [2];
