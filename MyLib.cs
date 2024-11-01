@@ -91,6 +91,13 @@ namespace MyLibrary {
 						return number + "th";
 				}
 			}
+
+			public static string TimeSpanToTimer(TimeSpan ts) {
+				return string.Format(
+					"{0:00}:{1:00}:{2:00}.{3:000}",
+					ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds
+				);
+			}
 		}
 
 		/// <summary>
@@ -633,9 +640,7 @@ namespace MyLibrary {
 			}
 
 			public static List<int> GetList(int size) {
-				if (size < 0) {
-					throw new ArgumentOutOfRangeException($"{nameof(size)} must be a positive integer.");
-				}
+				ArgumentOutOfRangeException.ThrowIfNegative(size, $"{nameof(size)} must be a positive integer.");
 
 				if (size == 0) {
 					return [];
