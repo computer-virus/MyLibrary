@@ -52,7 +52,7 @@ namespace MyLibrary {
 			string readLineResult = "";
 
 			// Declares Delegate For Error Correction
-			Action errorCorrection = new Action(() => {
+			Action errorCorrection = new(() => {
 				// Erases User Input
 				System.Console.SetCursorPosition(currentCursorPos[0], currentCursorPos[1]);
 				Console.Erase(readLineResult.Length, true);
