@@ -18,7 +18,7 @@ To use it, you'll need to build it and add it as a reference to the project you 
 - Find the .dll file in file explorer.
 - Ensure that the file is checked after you've imported it and then click OK
 - At the very top of your project (Yes, even before declaring the namespace. This should be on Line 1 of your project file.), write the line: using MyLibrary;
-- If you get no errors, you're good to go! You can at any point call any of the classes or methods available by calling the MyLib class. Such as: MyLib.Convert.Ordinal(1);
+- If you get no errors, you're good to go!
 
 **Disclaimer:**
 I wouldn't recommend using this for school projects you intend on handing in since everyone using the project will need to have the library and (most of the time) will need it to be the same version as the one you used.
