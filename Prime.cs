@@ -1,7 +1,13 @@
 ﻿namespace MyLibrary {
-	// Missing XML Comment
+	/// <summary>
+	///		<see cref="Prime"/> contains all of <see cref="MyLibrary"/>'s prime number <see langword="methods"/>.
+	/// </summary>
 	public static class Prime {
-		// Missing XML Comment
+		/// <summary>
+		///		<para>Returns <see langword="true"/> if <see cref="int"/> <paramref name="number"/> is a prime number.</para>
+		///		<para><see cref="Check(int)"/> must have exactly 1 <see langword="param"/>.</para>
+		/// </summary>
+		/// <param name="number"></param>
 		public static bool Check(int number) {
 			if (number < 2) {
 				return false;
@@ -26,9 +32,16 @@
 			return true;
 		}
 
-		// Missing XML Comment
-		public static List<int> GetList(int size) {
-			ArgumentOutOfRangeException.ThrowIfNegative(size, $"{nameof(size)} must be a positive integer.");
+		/// <summary>
+		///		<para>Returns a collection of the first prime numbers up to <see cref="int"/> <paramref name="size"/>.</para>
+		///		<para>Returns <see langword="null"/> if <paramref name="size"/> is less than 0.</para>
+		///		<para><see cref="GetList(int)"/> must have exactly 1 <see langword="param"/>.</para>
+		/// </summary>
+		/// <param name="size"></param>
+		public static List<int>? GetList(int size) {
+			if (size < 0) {
+				return null;
+			}
 
 			if (size == 0) {
 				return [];
@@ -58,13 +71,18 @@
 			return primes;
 		}
 
-		// Missing XML Comment
-		public static int GetNth(int n) {
-			if (n < 1) {
-				throw new ArgumentOutOfRangeException($"{nameof(n)} must be an integer greater than 0.");
+		/// <summary>
+		///		<para>Returns the <see cref="int"/> <paramref name="nth"/> prime number.</para>
+		///		<para>Returns <see langword="null"/> if <paramref name="nth"/> is less than 0.</para>
+		///		<para><see cref="GetNth(int)"/> must have exactly 1 <see langword="param"/>.</para>
+		/// </summary>
+		/// <param name="nth"></param>
+		public static int? GetNth(int nth) {
+			if (nth < 1) {
+				return null;
 			}
-
-			return GetList(n)[n - 1];
+			
+			return GetList(nth)?[nth - 1];
 		}
 	}
 }
