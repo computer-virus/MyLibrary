@@ -2,9 +2,9 @@
 
 namespace MyLibrary {
 	/// <summary>
-	///		<see cref="Console"/> contains all of <see cref="MyLibrary"/>'s console <see langword="methods"/>.
+	///		<see cref="MyConsole"/> contains all of <see cref="MyLibrary"/>'s console <see langword="methods"/>.
 	/// </summary>
-	public static class Console {
+	public static class MyConsole {
 		#region ReadLine Loop Methods
 		/// <summary>
 		///		<para>Writes <paramref name="prompt"/> to <see cref="System.Console"/> and then attempts to convert <see cref="System.Console.ReadLine"/> to the requested data type <typeparamref name="T"/>.</para>
@@ -55,7 +55,7 @@ namespace MyLibrary {
 			Action errorCorrection = new(() => {
 				// Erases User Input
 				System.Console.SetCursorPosition(currentCursorPos[0], currentCursorPos[1]);
-				Console.Erase(readLineResult.Length, true);
+				MyConsole.Erase(readLineResult.Length, true);
 				System.Console.WriteLine();
 				// Notes That User Made Error And Tracks Console Cursor Position At Beginning Of Error Message
 				isConverted = false;
@@ -63,7 +63,7 @@ namespace MyLibrary {
 					userDidError = true;
 					errorCursorPos = [System.Console.CursorLeft, System.Console.CursorTop];
 					// Writes Error Message
-					Console.ColorWrite(errorMessage, ConsoleColor.Red);
+					MyConsole.ColorWrite(errorMessage, ConsoleColor.Red);
 				}
 				// Resets Console Cursor Position And Allows User To Try Again
 				System.Console.SetCursorPosition(currentCursorPos[0], currentCursorPos[1]);
@@ -97,7 +97,7 @@ namespace MyLibrary {
 			if (userDidError) {
 				// Erases Previous Error Message
 				System.Console.SetCursorPosition(errorCursorPos[0], errorCursorPos[1]);
-				Console.Erase(errorMessage.Length, true);
+				MyConsole.Erase(errorMessage.Length, true);
 			}
 
 			// Returns Converted ReadLine

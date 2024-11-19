@@ -1,8 +1,8 @@
 ﻿namespace MyLibrary {
 	/// <summary>
-	///		<see cref="Random"/> contains all of <see cref="MyLibrary"/>'s standard random <see langword="methods"/>.
+	///		<see cref="MyRandom"/> contains all of <see cref="MyLibrary"/>'s standard random <see langword="methods"/>.
 	/// </summary>
-	public static class Random {
+	public static class MyRandom {
 
 		/// <summary>
 		///		<para>Default value for <see cref="NextChar()"/> and <see cref="NextChar(System.Random)"/>.</para>

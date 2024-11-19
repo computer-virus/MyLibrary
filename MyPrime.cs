@@ -1,8 +1,8 @@
 ﻿namespace MyLibrary {
 	/// <summary>
-	///		<see cref="Prime"/> contains all of <see cref="MyLibrary"/>'s prime number <see langword="methods"/>.
+	///		<see cref="MyPrime"/> contains all of <see cref="MyLibrary"/>'s prime number <see langword="methods"/>.
 	/// </summary>
-	public static class Prime {
+	public static class MyPrime {
 		/// <summary>
 		///		<para>Returns <see langword="true"/> if <see cref="int"/> <paramref name="number"/> is a prime number.</para>
 		///		<para><see cref="Check(int)"/> must have exactly 1 <see langword="param"/>.</para>

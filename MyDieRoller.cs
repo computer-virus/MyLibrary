@@ -1,8 +1,8 @@
 ﻿namespace MyLibrary {
 	/// <summary>
-	///		<see cref="DieRoller"/> contains all of <see cref="MyLibrary"/>'s die-based random <see langword="methods"/>.
+	///		<see cref="MyDieRoller"/> contains all of <see cref="MyLibrary"/>'s die-based random <see langword="methods"/>.
 	/// </summary>
-	public static class DieRoller {
+	public static class MyDieRoller {
 		#region Single Die Methods
 		/// <summary>
 		///		<para>Chooses a random <see cref="int"/> on a die with <see cref="int"/> <paramref name="size"/> faces.</para>

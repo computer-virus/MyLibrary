@@ -1,8 +1,8 @@
 ﻿namespace MyLibrary {
 	/// <summary>
-	///		<see cref="Convert"/> contains all of <see cref="MyLibrary"/>'s custom conversion <see langword="methods"/>.
+	///		<see cref="MyConvert"/> contains all of <see cref="MyLibrary"/>'s custom conversion <see langword="methods"/>.
 	/// </summary>
-	public static class Convert {
+	public static class MyConvert {
 		#region Script Conversion Methods
 		/// <summary>
 		///		<para>Converts a non-negative single digit <see cref="int"/> <paramref name="number"/> into a <see cref="char"/> containing the <paramref name="number"/> in superscript.</para>
