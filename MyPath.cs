@@ -2,10 +2,10 @@
 
 namespace MyLibrary {
 	/// <summary>
-	///		<see cref="MyShell"/> contains all of <see cref="MyLibrary"/>'s file and directory <see langword="methods"/>.
+	///		<see cref="MyPath"/> contains all of <see cref="MyLibrary"/>'s file, directory, and path <see langword="methods"/>.
 	/// </summary>
-	public static class MyShell {
-		#region Open Path Methods
+	public static class MyPath {
+		#region Open Methods
 		/// <summary>
 		///		<para>Opens a file, directory, or url using the given <see cref="string"/> <paramref name="path"/>, <see cref="string"/> <paramref name="arguments"/>, and <see cref="string"/> <paramref name="verb"/>.</para>
 		///		<para><see cref="Open(string, string, string)"/> can have 1 to 3 <see langword="params"/>.</para>
